@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  username  String     @unique
+  email     String     @unique
+  password  String
+  isDeleted Boolean    @default(false)
+  playlists Playlist[]
+  songs     Song[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Playlist {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  isDeleted   Boolean  @default(false)
+  creatorId   Int
+  creator     User     @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  songs       Song[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Song {
+  id         Int      @id @default(autoincrement())
+  title      String
+  youtubeUrl String
+  isDeleted  Boolean  @default(false)
+  playlistId Int
+  playlist   Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  addedById  Int
+  addedBy    User     @relation(fields: [addedById], references: [id])
+  order      Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
