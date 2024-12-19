@@ -1,0 +1,30 @@
+{
+  "name": "music-together-api",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "ts-node src/app.ts",
+    "start:dev": "cross-env NODE_ENV=dev nodemon --exec ts-node src/app.ts",
+    "start:prod:pm2": "cross-env NODE_ENV=prod pm2 start dist/src/app.js",
+    "start:prod": "cross-env NODE_ENV=prod node dist/src/app.js",
+    "build": "tsc",
+    "build:prod": "tsc --outDir dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.2",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
