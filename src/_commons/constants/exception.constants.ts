@@ -9,6 +9,16 @@ export const CustomHttpException = {
         code: "UNAUTHORIZED_ACCOUNT",
         message: "잘못된 아이디 또는 패스워드입니다.",
     },
+    FORBIDDEN_ACCOUNT: {
+        statusCode: 403,
+        code: "FORBIDDEN_ACCOUNT",
+        message: "해당 계정의 접근 권한이 없습니다.",
+    },
+    NOT_FOUND: {
+        statusCode: 404,
+        code: "NOT_FOUND",
+        message: "요청한 내용을 찾을 수 없습니다.",
+    },
     CONFLICT_EMAIL: {
         statusCode: 409,
         code: "CONFLICT_EMAIL",

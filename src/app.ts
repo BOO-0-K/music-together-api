@@ -5,6 +5,8 @@ import helmet from "helmet";
 import logger from "morgan";
 import exceptionMiddleware from "./_commons/middlewares/exception.middleware";
 import userRouter from "./routers/user.router";
+import playlistRouter from "./routers/playlist.router";
+import songRouter from "./routers/song.router";
 
 const PORT = env.port ?? 3000;
 
@@ -17,6 +19,8 @@ app.use(logger("dev"));
 
 // 라우터 설정
 app.use("/users", userRouter);
+app.use("/playlists", playlistRouter);
+app.use("/songs", songRouter);
 
 // 에러 핸들링
 app.use(exceptionMiddleware);

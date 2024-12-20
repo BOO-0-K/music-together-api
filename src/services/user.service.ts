@@ -36,7 +36,7 @@ class UserService {
 
         // 사용자 중복 체크 (사용자 이름)
         const existingUsername =
-            await this.userRepository.findByEmail(username);
+            await this.userRepository.findByUsername(username);
         if (existingUsername) {
             throw new Exception(
                 CustomHttpException["CONFLICT_USERNAME"].statusCode,

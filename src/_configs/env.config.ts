@@ -8,6 +8,9 @@ const env = {
         secret: process.env.JWT_SECRET,
         expiresIn: process.env.JWT_SECRET_EXPIRES_IN,
     },
+    youtube: {
+        key: process.env.YOUTUBE_API_KEY,
+    },
 };
 
 export default env;

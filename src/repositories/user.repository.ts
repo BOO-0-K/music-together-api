@@ -10,7 +10,7 @@ class UserRepository {
     }
 
     // 사용자 이름으로 회원 찾기
-    async checkUserAccess(username: string) {
+    async findByUsername(username: string) {
         const user = await prisma.user.findFirst({ where: { username } });
 
         return user;
