@@ -63,10 +63,25 @@ class PlaylistRepository {
                 isDeleted: false,
             },
             include: {
-                creator: true,
+                creator: {
+                    select: {
+                        id: true,
+                        username: true,
+                    },
+                },
                 songs: {
-                    include: {
-                        addedBy: true,
+                    select: {
+                        id: true,
+                        title: true,
+                        youtubeUrl: true,
+                        isDeleted: true,
+                        order: true,
+                        addedBy: {
+                            select: {
+                                id: true,
+                                username: true,
+                            },
+                        },
                     },
                 },
             },
@@ -78,8 +93,7 @@ class PlaylistRepository {
 
         return {
             id: playlist.id,
-            userId: playlist.creatorId,
-            username: playlist.creator.username,
+            creator: playlist.creator,
             name: playlist.name,
             description: playlist.description,
             songs: playlist.songs,
