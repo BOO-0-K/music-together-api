@@ -5,7 +5,8 @@ import {
     Request as ExpressRequest,
     Response as ExpressResponse,
 } from "express";
-import Response from "../utils/response";
+import Exception from "../utils/exception";
+import { CustomHttpException } from "../constants/exception.constants";
 
 const validationMiddleware = (dtoClass: any) => {
     return async (
@@ -26,7 +27,11 @@ const validationMiddleware = (dtoClass: any) => {
                     };
                 });
 
-                Response.send(res, 400, "잘못된 접근입니다.", { errors: errs });
+                throw new Exception(
+                    CustomHttpException["BAD_REQUEST"].statusCode,
+                    CustomHttpException["BAD_REQUEST"].message,
+                    { errors: errs },
+                );
             }
 
             req.body = dtoInstance;

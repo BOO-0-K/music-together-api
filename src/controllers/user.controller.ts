@@ -19,6 +19,13 @@ class UserController {
         const token = await this.userService.signup(username, email, password);
         Response.send(res, 201, CustomHttpSuccess["SIGNUP_SUCCESS"], token);
     };
+
+    // 로그인
+    signin = async (req: ExpressRequest, res: ExpressResponse) => {
+        const { email, password } = req.body;
+        const token = await this.userService.signin(email, password);
+        Response.send(res, 200, CustomHttpSuccess["SIGNIN_SUCCESS"], token);
+    };
 }
 
 export default UserController;

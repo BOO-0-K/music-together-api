@@ -1,4 +1,9 @@
 export const CustomHttpException = {
+    BAD_REQUEST: {
+        statusCode: 400,
+        code: "BAD_REQUEST",
+        message: "잘못된 접근입니다.",
+    },
     UNAUTHORIZED_ACCOUNT: {
         statusCode: 401,
         code: "UNAUTHORIZED_ACCOUNT",

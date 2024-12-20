@@ -14,7 +14,7 @@ const exceptionMiddleware = (
     next: ExpressNextFunction,
 ) => {
     if (err instanceof Exception) {
-        Response.send(res, err.statusCode, err.message);
+        Response.send(res, err.statusCode, err.message, err.data);
     } else {
         console.log(err.stack);
         Response.send(

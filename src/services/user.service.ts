@@ -64,6 +64,41 @@ class UserService {
 
         return { token };
     }
+
+    /**
+     * 로그인
+     * @param email string
+     * @param password string
+     * @returns TokenDto
+     */
+    async signin(email: string, password: string): Promise<TokenDto> {
+        // 이메일로 회원 찾기
+        const user = await this.userRepository.findByEmail(email);
+        if (!user) {
+            throw new Exception(
+                CustomHttpException["UNAUTHORIZED_ACCOUNT"].statusCode,
+                CustomHttpException["UNAUTHORIZED_ACCOUNT"].message,
+            ); // 사용자명이 없는 경우
+        }
+
+        if (!(await bcrypt.compare(password, user.password))) {
+            throw new Exception(
+                CustomHttpException["UNAUTHORIZED_ACCOUNT"].statusCode,
+                CustomHttpException["UNAUTHORIZED_ACCOUNT"].message,
+            ); // 비밀번호가 다른 경우
+        }
+
+        // JWT 토큰 생성
+        if (!env.jwt.secret) {
+            throw new Error("JWT Errors");
+        }
+        const payload = { id: user.id };
+        const token = jwt.sign(payload, env.jwt.secret, {
+            expiresIn: env.jwt.expiresIn,
+        });
+
+        return { token };
+    }
 }
 
 export default UserService;

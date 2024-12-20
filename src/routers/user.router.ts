@@ -2,7 +2,7 @@ import { Router } from "express";
 import asyncHandler from "express-async-handler";
 import UserController from "../controllers/user.controller";
 import validationMiddleware from "../_commons/middlewares/validation.middleware";
-import { SignupRequestDto } from "../dtos/user.dto";
+import { SigninRequestDto, SignupRequestDto } from "../dtos/user.dto";
 import UserRepository from "../repositories/user.repository";
 import UserService from "../services/user.service";
 
@@ -22,6 +22,16 @@ router.post(
     "/signup",
     validationMiddleware(SignupRequestDto),
     asyncHandler(userController.signup),
+);
+
+/**
+ * POST /users/signin
+ * 로그인
+ */
+router.post(
+    "/signin",
+    validationMiddleware(SigninRequestDto),
+    asyncHandler(userController.signin),
 );
 
 export default router;
