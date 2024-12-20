@@ -14,13 +14,13 @@ const exceptionMiddleware = (
     next: ExpressNextFunction,
 ) => {
     if (err instanceof Exception) {
-        Response.send(res, err.message, err.statusCode);
+        Response.send(res, err.statusCode, err.message);
     } else {
         console.log(err.stack);
         Response.send(
             res,
-            CustomHttpException["DB_SERVER_ERROR"].message,
             CustomHttpException["DB_SERVER_ERROR"].statusCode,
+            CustomHttpException["DB_SERVER_ERROR"].message,
         );
     }
 };

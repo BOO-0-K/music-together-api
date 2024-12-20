@@ -9,8 +9,8 @@ interface IResponse {
 class Response {
     static send(
         res: ExpressResponse,
-        message: string,
         statusCode: number = 200,
+        message: string,
         data?: object,
     ): void {
         const response: IResponse = {
